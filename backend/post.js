@@ -16,7 +16,7 @@ var keyz = ssbKeys.load('/var/www/backend/keys/' + l , function(err, k) {
                 feed.publish({
                         type: 'post',
                         text: post
-                }, function (err) { console.log(err); process.exit(1); })
+                }, function (err) { console.log(err); sbot.close(); })
         })
 
 });
