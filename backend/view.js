@@ -1,11 +1,11 @@
 const l = process.argv[2];
 
-var ssbClient = require('ssb-client');
-var ssbKeys = require('ssb-keys');
-var ssbFeed = require('ssb-feed');
-var pull = require('pull-stream');
+const ssbClient = require('ssb-client');
+const ssbKeys = require('ssb-keys');
+const ssbFeed = require('ssb-feed');
+const pull = require('pull-stream');
 
-var keyz = ssbKeys.load('/var/www/backend/keys/' + l , function(err, k) {
+const keyz = ssbKeys.load('/var/www/backend/keys/' + l , function(err, k) {
         ssbClient(keyz,
         function (err, sbot) {
 		    pull(
