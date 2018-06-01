@@ -1,10 +1,12 @@
 #!/bin/bash
 function fix_permissions() {
-    sleep 5
+    sleep 1
     echo Fixing Permissions
-    ln -s /root/.ssb /var/www
-    chmod a+rwX /var/www/.ssb
-    chmod -R a+rwX /var/www/.ssb
+    mv /root/.ssb /var/lib/ssb
+    chmod a+rwX /var/lib/ssb
+    chmod -R a+rwX /var/lib/ssb
+    ln -s /.ssb /root/.ssb
+    ln -s /var/lib/ssb /.ssb
     exit 0
 }
 php-fpm5
