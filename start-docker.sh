@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 function fix_permissions() {
     sleep 1
     echo Fixing Permissions
