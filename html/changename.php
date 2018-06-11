@@ -1,23 +1,10 @@
 <?php
-
-include ("global.php");
-if (isset($_SESSION['login'])) header("location: view.php");			
-if (isset($_POST['action'])) {
-	$l=$_POST['login'];
-	$p=$_POST['password'];
-	$lp=file_get_contents ("/var/www/backend/userlist");
-	$lpa=explode("\n",$lp);
-	foreach ($lpa as $k=>$v) {
-		$kv=explode("\t",$v);
-		
-        if ($kv[0]==$l) {			
-			if ($kv[1] == GetPasswordHash($l,$p)) {
-				$_SESSION['login']=$l;
-				header("location: view.php");			
-			}
-		}
-	}
-	die("incorrect l/p");
+session_start();
+if (isset($_POST['name'])) {
+	$l=$_SESSION['login'];
+	$n=$_POST['name'];
+        shell_exec ("nodejs /var/www/backend/post.js $l \"$n\" 2>&1");
+        header("location: view.php");
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,13 +34,14 @@ if (isset($_POST['action'])) {
 
 </ul>
 </div>
-<!-- InstanceBeginEditable name="Body" --><br /><br />
-<form method="post" class="login">
-<h1>Login Account</h1>
-<input class="textbox" placeholder="Login" name="login"><br>
-<input class="textbox"  placeholder="Password" name="password" type="password"><br>
-<input type="submit" name="action" value="Login"> <input type="button" onclick="document.location='create.php'"  value="Create Account">
+<!-- InstanceBeginEditable name="Body" -->
+<center><h1>Change Name</h1></center>
+<div style="width:400px; margin:0 auto">
+<form method="post">
+<input name="name" />
+<input  type="submit" value="Change Name">
 </form>
+</div>
 <!-- InstanceEndEditable -->
 </body>
 <!-- InstanceEnd --></html>

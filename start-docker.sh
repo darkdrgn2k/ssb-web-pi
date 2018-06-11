@@ -6,7 +6,9 @@ function fix_permissions() {
     chmod a+rwX /var/lib/ssb
     chmod -R a+rwX /var/lib/ssb
     ln -s /.ssb /root/.ssb
-    ln -s /var/lib/ssb /.ssb
+    ln -s /var/lib/ssb /.ssb    
+    #Start broadcaster in background
+    ./ssb-broadcast.sh &
     exit 0
 }
 php-fpm5

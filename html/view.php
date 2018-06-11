@@ -4,6 +4,11 @@ function toDate($ts) {
 	$ts=$ts/1000;
 	return  date('Y-m-d H:i:s',$ts);
 }
+function getName($r) {
+        $l=$_SESSION['login'];
+        $v=shell_exec ("nodejs /var/www/backend/getname.js $l \"$r\" 2>&1");
+        return $v;
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Template.dwt.php" codeOutsideHTMLIsLocked="false" -->
@@ -24,6 +29,7 @@ function toDate($ts) {
 <?php if (isset($_SESSION['login'])) { ?>
 <li><a href="/view.php">View</a></li>
 <li><a href="/post.php">Post</a></li>
+<li><a href="/changename.php">Change Name</a></li>
 <?php } else { ?>
 <li><a href="/login.php">Login</a></li>
 <li><a href="/create.php">Create</a></li>
@@ -48,7 +54,7 @@ $v=shell_exec("cat /var/www/backend/keys/" . $_SESSION['login'] . " |grep -v \\#
 //$v=file_get_contents("/var/www/backend/keys/" . $_SESSION['login']);
 $r=json_decode($v);
 //echo $r->id;
-$v= shell_exec("/usr/local/bin/sbot feed 2>&1");
+$v= shell_exec("/usr/local/bin/sbot feed --reverse 2>&1");
 $v="[" . str_replace("}\n\n{","}\n,\n{",$v) . "]";
 $v=json_decode($v,true);
 

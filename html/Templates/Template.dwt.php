@@ -17,6 +17,7 @@
 <?php if (isset($_SESSION['login'])) { ?>
 <li><a href="/view.php">View</a></li>
 <li><a href="/post.php">Post</a></li>
+<li><a href="/changename.php">Change Name</a></li>
 <?php } else { ?>
 <li><a href="/login.php">Login</a></li>
 <li><a href="/create.php">Create</a></li>
