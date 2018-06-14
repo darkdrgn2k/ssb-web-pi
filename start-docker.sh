@@ -1,5 +1,9 @@
 #!/bin/sh
 function fix_permissions() {
+    while [ ! -f /root/.ssb/secret ]
+    do
+      sleep 1
+    done
     sleep 1
     echo Fixing Permissions
     mv /root/.ssb /var/lib/ssb
