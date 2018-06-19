@@ -12,7 +12,7 @@ function fix_permissions() {
     ln -s /.ssb /root/.ssb
     ln -s /var/lib/ssb /.ssb    
     #Start broadcaster in background
-    ./ssb-broadcast.sh &
+    /root/ssb-web-pi/ssb-broadcast.sh &
     exit 0
 }
 php-fpm5
