@@ -12,18 +12,16 @@
 
 <body>
 <div class="TopMenu">
-<ul>
-<li><a href="index.php"><img src="images/SSB-logo.png" width="45" height="45" /></a></li>
-<?php if (isset($_SESSION['login'])) { ?>
-<li><a href="view.php">View</a></li>
-<li><a href="post.php">Post</a></li>
-<li><a href="changename.php">Change Name</a></li>
-<?php } else { ?>
-<li><a href="login.php">Login</a></li>
-<li><a href="create.php">Create</a></li>
-<?php } ?>
-
-</ul>
+  <ul>
+    <li><a href="index.php"><img src="images/SSB-logo.png" width="45" height="45" /></a></li>
+    <?php if (isset($_SESSION['login'])) { ?>
+      <li><a href="view.php">View</a></li>
+      <li><a href="changename.php">Change Name</a></li>
+      <?php } else { ?>
+      <li><a href="login.php">Login</a></li>
+      <li><a href="create.php">Create</a></li>
+      <?php } ?>
+  </ul>
 </div>
 <!-- InstanceBeginEditable name="Body" --><h1>Welcome to SSB Local</h1>
 <br /><br />
