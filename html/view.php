@@ -36,6 +36,33 @@ if (isset($_POST['post'])) {
   </ul>
 </div>
 <!-- InstanceBeginEditable name="Body" -->
+<script>
+HTMLTextAreaElement.prototype.insertAtCaret = function (text) {
+  text = text || '';
+  if (document.selection) {
+    // IE
+    this.focus();
+    var sel = document.selection.createRange();
+    sel.text = text;
+  } else if (this.selectionStart || this.selectionStart === 0) {
+    // Others
+    var startPos = this.selectionStart;
+    var endPos = this.selectionEnd;
+    this.value = this.value.substring(0, startPos) +
+      text +
+      this.value.substring(endPos, this.value.length);
+    this.selectionStart = startPos + text.length;
+    this.selectionEnd = startPos + text.length;
+  } else {
+    this.value += text;
+  }
+};
+function InsertIPFSVideo() {
+	var hash=prompt("Please enter IPFS Hash");
+	var p=document.getElementById("post");
+	p.insertAtCaret("[!video:" + hash + "]");
+}
+</script>
 <style>
 .post {
 	width:600px;
@@ -49,7 +76,8 @@ if (isset($_POST['post'])) {
 </style>
 <div style="width:395px; margin:0 auto">
   <form method="post">
-    <textarea name="post" cols="40" rows="3"></textarea>
+     <input type="button" value="Insert IPFS Video" onclick="InsertIPFSVideo()" />
+    <textarea name="post" cols="40" rows="3" id="post"></textarea>
     <br />
     <input  type="submit" value="Post">
   </form>

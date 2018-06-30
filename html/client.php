@@ -14,7 +14,7 @@ class sbotClient {
                 shell_exec ("nodejs /var/www/backend/post.js $l \"$msg\" 2>&1");
                 return 1;
           }
-    }
+    	}
         function toDate($ts) {
                 $ts=$ts/1000;
                 return  date('Y-m-d H:i:s',$ts);
@@ -41,7 +41,7 @@ class sbotClient {
 		var $counter=0;
 		function renderPlayerIPFS($url) {
 			$this->counter++;
-			$res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls preload >';
+			$res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
 			$res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
 			$res.='<source src="/ipfs/\\1">';
 			$res.='</video>';
