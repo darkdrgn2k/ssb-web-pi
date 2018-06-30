@@ -33,8 +33,19 @@ class sbotClient {
                 }
         }
 		function render($msg) {
-			$msg=str_replace("\n","<br/>",$msg);
-			return $msg;
+				$msg=str_replace("\n","<br/>",$msg);
+				$msg=preg_replace("#\[!video:(.*?)\]#si",$this->renderPlayerIPFS("\\1"),$msg);
+
+				return $msg;
+		}
+		var $counter=0;
+		function renderPlayerIPFS($url) {
+			$this->counter++;
+			$res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls preload >';
+			$res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
+			$res.='<source src="/ipfs/\\1">';
+			$res.='</video>';
+			return $res;
 		}
 }
 $sbot=new sbotClient();
