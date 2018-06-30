@@ -24,7 +24,7 @@ class sbotClient {
                 if (isset($this->nameRepo[$r])) {
                         return $this->nameRepo[$r];
                 } else {
-                $v=shell_exec ("nodejs /var/www/backend/getname.js $l \"$r\" 2>&1");
+                	$v=shell_exec ("nodejs /var/www/backend/getname.js $l \"$r\" 2>&1");
                         if (trim($v)=="") {
                                 return $r;
                         } else {
@@ -46,6 +46,11 @@ class sbotClient {
 			$res.='<source src="/ipfs/\\1">';
 			$res.='</video>';
 			return $res;
+		}
+		function changeName($newName) {
+			$l=$this->getLogin();
+			$n=$newName;
+		    shell_exec ("nodejs /var/www/backend/changename.js $l \"$n\" 2>&1");
 		}
 }
 $sbot=new sbotClient();

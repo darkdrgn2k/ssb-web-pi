@@ -1,10 +1,8 @@
 <?php
-session_start();
+include("client.php");
 if (isset($_POST['name'])) {
-	$l=$_SESSION['login'];
-	$n=$_POST['name'];
-        shell_exec ("nodejs /var/www/backend/changename.js $l \"$n\" 2>&1");
-        header("location: view.php");
+	$sbot->changeName($_POST['name']);
+    header("location: view.php");
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
