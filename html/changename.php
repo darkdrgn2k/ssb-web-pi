@@ -3,7 +3,7 @@ session_start();
 if (isset($_POST['name'])) {
 	$l=$_SESSION['login'];
 	$n=$_POST['name'];
-        shell_exec ("nodejs /var/www/backend/post.js $l \"$n\" 2>&1");
+        shell_exec ("nodejs /var/www/backend/changename.js $l \"$n\" 2>&1");
         header("location: view.php");
 }
 ?>

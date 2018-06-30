@@ -22,7 +22,12 @@ var keyz = ssbKeys.load('/var/www/backend/keys/' + l , function(err, k) {
               values: true,
               reverse: true
             }),
-            pull.collect(function (err, msgs) { console.log(msgs[0].value.content.name) ;  sbot.close() })
+            pull.collect(function (err, msgs) {
+              if (msgs.length>0)
+                 console.log(msgs[0].value.content.name);
+              sbot.close()
+              })
          )
          });
 });
+
