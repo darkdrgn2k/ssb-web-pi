@@ -13,6 +13,9 @@ if (isset($_POST['post'])) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>Untitled Document</title>
+<link href="video.js/video-js.min.css" rel="stylesheet">
+<script src="video.js/video.js"></script> 
+<script src="video-hls.js/videojs-contrib-hls.js"></script>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
 <!-- InstanceEndEditable -->
