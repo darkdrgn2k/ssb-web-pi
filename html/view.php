@@ -82,6 +82,15 @@ function InsertIPFSVideo() {
     <input  type="submit" value="Post">
   </form>
 </div>
+<div style="float:left; width:200px; display:block; border:1px solid red; overflow: hidden;">
+<h2>Peers</h2><br>
+<?php 
+$p=$sbot->getPeers()['local'];
+foreach ($p as $peer)
+        echo substr($peer['name'],0,20) . "<br>";
+
+?>
+</div>
 <?php
 $v=shell_exec("cat /var/www/backend/keys/" . $_SESSION['login'] . " |grep -v \\#");
 //$v=file_get_contents("/var/www/backend/keys/" . $_SESSION['login']);
