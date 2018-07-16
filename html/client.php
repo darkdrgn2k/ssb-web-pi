@@ -32,26 +32,45 @@ class sbotClient {
                         }
                 }
         }
-		function render($msg) {
-				$msg=str_replace("\n","<br/>",$msg);
-				$msg=preg_replace("#\[!video:(.*?)\]#si",$this->renderPlayerIPFS("\\1"),$msg);
+	function render($msg) {
+			$msg=str_replace("\n","<br/>",$msg);
+			$msg=preg_replace("#\[!video:(.*?)\]#si",$this->renderPlayerIPFS("\\1"),$msg);
+			return $msg;
+	}
+	var $counter=0;
+	function renderPlayerIPFS($url) {
+		$this->counter++;
+		$res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
+		$res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
+		$res.='<source src="/ipfs/\\1">';
+		$res.='</video>';
+		return $res;
+	}
+	function changeName($newName) {
+		$l=$this->getLogin();
+		$n=$newName;
+		shell_exec ("nodejs /var/www/backend/changename.js $l \"$n\" 2>&1");
+	}
+  	function getPeers() {
+		$source=shell_exec ("sbot gossip.peers");
+                $source=json_decode($source,true);
 
-				return $msg;
-		}
-		var $counter=0;
-		function renderPlayerIPFS($url) {
-			$this->counter++;
-			$res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
-			$res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
-			$res.='<source src="/ipfs/\\1">';
-			$res.='</video>';
-			return $res;
-		}
-		function changeName($newName) {
-			$l=$this->getLogin();
-			$n=$newName;
-		    shell_exec ("nodejs /var/www/backend/changename.js $l \"$n\" 2>&1");
-		}
+                foreach ($source as $peer) {
+                    if (!isset($peer['failure']) || $peer['failure']=='0') {
+                        $r['name']=getName($peer['key']);
+                        if ($peer['source']=='local') {
+                           $local[]=$r;
+                        } else {
+                            $remote[]=$r;
+                       }
+                    }
+                }
+                $peers['local']=$local;
+                $peers['remote']=$remote;
+
+                return $peers;
+               }
+	}
 }
 $sbot=new sbotClient();
 ?>
