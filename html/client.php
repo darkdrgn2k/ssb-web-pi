@@ -57,7 +57,7 @@ class sbotClient {
 
                 foreach ($source as $peer) {
                     if (!isset($peer['failure']) || $peer['failure']=='0') {
-                        $r['name']=getName($peer['key']);
+                        $r['name']=$this->getName($peer['key']);
                         if ($peer['source']=='local') {
                            $local[]=$r;
                         } else {
@@ -70,7 +70,6 @@ class sbotClient {
 
                 return $peers;
                }
-	}
 }
 $sbot=new sbotClient();
 ?>
