@@ -34,18 +34,27 @@ class sbotClient {
         }
 	function render($msg) {
 			$msg=str_replace("\n","<br/>",$msg);
-			$msg=preg_replace("#\[!video:(.*?)\]#si",$this->renderPlayerIPFS("\\1"),$msg);
+			$msg=preg_replace("#\[!videoIPFS:(.*?)\]#si",$this->renderPlayerIPFS("\\1"),$msg);
+	 		$msg=preg_replace("#\[!videoIPNS:(.*?)\]#si",$this->renderPlayerIPNS("\\1"),$msg);
 			return $msg;
 	}
 	var $counter=0;
-	function renderPlayerIPFS($url) {
-		$this->counter++;
-		$res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
-		$res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
-		$res.='<source src="/ipfs/\\1">';
-		$res.='</video>';
-		return $res;
-	}
+        function renderPlayerIPFS($url) {
+                $this->counter++;
+                $res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
+                $res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
+                $res.='<source src="/ipfs/\\1">';
+                $res.='</video>';
+                return $res;
+        }
+        function renderPlayerIPNS($url) {
+                $this->counter++;
+                $res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
+                $res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
+                $res.='<source src="/ipns/\\1">';
+                $res.='</video>';
+                return $res;
+        }
 	function changeName($newName) {
 		$l=$this->getLogin();
 		$n=$newName;
