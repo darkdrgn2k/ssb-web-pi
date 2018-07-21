@@ -60,7 +60,13 @@ HTMLTextAreaElement.prototype.insertAtCaret = function (text) {
 function InsertIPFSVideo() {
 	var hash=prompt("Please enter IPFS Hash");
 	var p=document.getElementById("post");
-	p.insertAtCaret("[!video:" + hash + "]");
+	p.insertAtCaret("[!videoIPFS:" + hash + "]");
+}
+	
+function InsertIPNSVideo() {
+	var hash=prompt("Please enter IPFS Hash");
+	var p=document.getElementById("post");
+	p.insertAtCaret("[!videoIPNS:" + hash + "]");
 }
 </script>
 <style>
@@ -77,6 +83,7 @@ function InsertIPFSVideo() {
 <div style="width:395px; margin:0 auto">
   <form method="post">
      <input type="button" value="Insert IPFS Video" onclick="InsertIPFSVideo()" />
+     <input type="button" value="Insert IPNS Stream" onclick="InsertIPNSVideo()" />
     <textarea name="post" cols="40" rows="3" id="post"></textarea>
     <br />
     <input  type="submit" value="Post">
