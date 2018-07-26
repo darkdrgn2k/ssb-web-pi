@@ -51,7 +51,7 @@ class sbotClient {
                 $this->counter++;
                 $res ='<video id="live' . $this->counter  .'" class="video-js vjs-default-skin vjs-big-play-centered" controls >';
                 $res.='<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>';
-                $res.='<source src="/ipns/\\1">';
+                $res.='<source src="/ipns/\\1" type="application/x-mpegURL">';
                 $res.='</video>';
                 return $res;
         }
