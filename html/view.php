@@ -12,7 +12,7 @@ if (isset($_POST['post'])) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>Untitled Document</title>
+<title>SSB - View Feed</title>
 <link href="video.js/video-js.min.css" rel="stylesheet">
 <script src="video.js/video.js"></script> 
 <script src="video-hls.js/videojs-contrib-hls.js"></script>
@@ -94,7 +94,13 @@ function InsertIPNSVideo() {
 <?php 
 $p=$sbot->getPeers()['local'];
 foreach ($p as $peer)
-        echo substr($peer['name'],0,20) . "<br>";
+       echo "<a href='follow.php?key="  . $peer['key'] . "'>";
+        if ($peer['key']==$peer['name']) { 
+            echo substr($peer['name'],0,10) . "..." .  substr($peer['name'],-10);
+       } else  {
+            echo $peer['name'];
+      }
+      echo "</a><br />";
 
 ?>
 </div>
@@ -114,7 +120,9 @@ foreach ($v as $post) {
 	?>
 <div class="post">
   <div class="meta"> <span class="author"><b>Author:</b><span>
+    <a href="follow.php?key=<?=$post['value']['author']?>">
     <?=$sbot->getName($post['value']['author'])?>
+     </a>
     </span></span><br />
     <span class="timestamp"><span>
     <?=$sbot->toDate($post['value']['timestamp'])?>

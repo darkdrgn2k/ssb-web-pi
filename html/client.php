@@ -15,6 +15,13 @@ class sbotClient {
                 return 1;
           }
     	}
+        function Follow($msg) {
+          if (isset($_POST['follow'])) {
+                $l=$this->getLogin();
+                shell_exec ("nodejs /var/www/backend/follow.js $l \"$msg\" 2>&1");
+                return 1;
+          }
+    	}
         function toDate($ts) {
                 $ts=$ts/1000;
                 return  date('Y-m-d H:i:s',$ts);
@@ -66,6 +73,7 @@ class sbotClient {
 
                 foreach ($source as $peer) {
                     if (!isset($peer['failure']) || $peer['failure']=='0') {
+                        $r['key']=$peer['key'];
                         $r['name']=$this->getName($peer['key']);
                         if ($peer['source']=='local') {
                            $local[]=$r;
