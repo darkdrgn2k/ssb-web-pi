@@ -12,7 +12,7 @@ if (isset($_POST['post'])) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>Untitled Document</title>
+<title>SSB - View Feed</title>
 <link href="video.js/video-js.min.css" rel="stylesheet">
 <script src="video.js/video.js"></script> 
 <script src="video-hls.js/videojs-contrib-hls.js"></script>
