@@ -11,6 +11,8 @@ if (isset($_POST['action'])) {
 	if ($p!=$p2) { die("L/P Not the same"); }
 		
 	shell_exec ("nodejs /var/www/backend/create.js $l");
+        shell_exec('sbot publish --type contact --contact $(cat /var/www/backend/keys/' . $l . ' | grep \"id\" | awk \'{print $2}\') --following');
+	
 	$lp=file_get_contents ("/var/www/backend/userlist");
 	$lpa=explode("\n",$lp);
 	foreach ($lpa as $k=>$v) {
